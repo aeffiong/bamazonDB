@@ -37,9 +37,27 @@ function startPurchase() {
             {
                 name: "amount",
                 type: "input",
-                message: "How many do you want to buy?"
+                message: "How many do you want to buy?",
+                validate: function(value) {
+                    if(isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
             }
-        ]);
+        ]).then(function(answer) {
+            // check database to see if there is enough product to sell
+            var chosenProduct;
+            for(var i = 0; i < results.length; i++) {
+                chosenProduct = results[i];
+                console.log(chosenProduct);
+            }
+
+            // if store has enough product, full order and update quantity in database and show customer total cost
+            // if(chosenProduct)
+
+            // if not enough quantity, say "insufficient quantity" and prevent order from going through
+        })
         }
     )
 }
