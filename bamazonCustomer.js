@@ -195,7 +195,9 @@ function displayStore() {
                                     }],
                                     function (err, res) {
                                         if (err) throw err;
-                                        console.log(res);
+                                        console.log("Your order has been completed! Thanks!");
+                                        connection.end();
+                                        
                                     }
                         
                                 )
@@ -204,83 +206,14 @@ function displayStore() {
                                 console.log("Insuffient stock, please try again");
                                 displayStore();
                             }
-                            console.log("Your order has been completed! Thanks!");
-                            connection.end();
+                            
                         }
                     )
-                    // i want to match the id with the product then compare amount ordered to what's in stock
-                    // connection.query(
-                    //     "UPDATE products SET ? WHERE ? ", [{
-                    //         stock_quantity: parseInt(chosenItem.stock_quantity) - parseInt(answer.amount)
-                    //     },
-                    //     {
-                    //         item_id: parseInt(answer.id)
-                    //     }],
-                    //     function(err, res) {
-                    //         if(err) throw err;
-                    //         if (parseInt(answer.amount) <= parseInt(chosenItem.stock_quantity)) {
-                    //             console.log(chosenItem);
-                    //             console.log("Success! Your item is in stock and your order is being placed!");
-                    //             console.log("Input id: " +answer.id + " the item's id" + chosenItem.item_id 
-                    //             + " the quantity available" + chosenItem.stock_quantity);
-                    //             // console.log("Your total is: $" + parseInt(answer.amount) * chosenItem.price.toPrecision(5));
-                    //         } else {
-                    //             console.log("Insuffient stock, please try again");
-                    //             displayStore();
-                    //         }
-                    //         console.log("Your order has been completed! Thanks!");
-                    //         connection.end();
-                    //     }
-                    // )
 
                 }
                 )
 
-
-
         });
-
-    function update() {
-        connection.query(
-            "UPDATE products SET ? WHERE ? ", [{
-                stock_quantity: parseInt(res[0].stock_quantity) - parseInt(answer.amount)
-            },
-            {
-                item_id: parseInt(answer.id)
-            }],
-            function (err, res) {
-                if (err) throw err;
-                console.log(res);
-            }
-
-        )
-    };
-
-    // user selects which item id they want to purchase
-
-
-    // update store quantity - this is where I'm stuck: new function?
-    // connection.query(
-    //     "UPDATE products SET stock_quantity WHERE ? ",
-    //     {item_id: answer.id},
-    //     function (error, result) {
-
-    //         if (error) throw error;
-    //         console.log(result);
-
-    //     }
-    // )
-    // var chosenItem = [];
-    // for(var i = 0; i < results.length; i++) {
-    // console.log(chosenItem.push(results[i].stock_quantity))
-    // console.log("Item ID: " + answer.id + " " + "Quantity to purchase: " + answer.amount);
-    // }
-
-
-
-
-    // if not enough quantity, say "insufficient quantity" and prevent order from going through
-
 }
 
 

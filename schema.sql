@@ -1,5 +1,7 @@
 -- Schema for the bamazon database
 
+DROP DATABASE IF EXISTS bamazon;
+
 CREATE DATABASE bamazon;
 
 USE bamazon;
