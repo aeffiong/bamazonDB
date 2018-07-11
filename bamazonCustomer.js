@@ -128,7 +128,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connection successful!");
-    console.log("Welcome to bamazon! Select an item by [item_id] that you would like to purchase.");
+    console.log("Welcome to bamazon! Select an item by [Item ID] that you would like to purchase.");
     displayStore();
 });
 
@@ -168,27 +168,35 @@ function displayStore() {
             }
             ]).then(function (answer) {
                 // if store has enough product, full order and update quantity in database and show customer total cost
-                        
-                        if (answer.amount <= results[0].stock_quantity) {
-                            console.log("Success! Your item is in stock and your order is being placed!");
-                            console.log("Your total is: $" + parseInt(answer.amount) * results[0].price.toFixed(2));
-                            connection.query(
-                                "UPDATE products SET ? WHERE ? ", [{
-                                    stock_quantity: results[0].stock_quantity - answer.amount
-                                },
-                                {
-                                    item_id: answer.id
-                                }],
-                                function(err, res) {
-                                    if(err) throw err;
-                                    console.log(res);
-                                }
-                            )
+                console.log(results);
+                var chosenItem;
+                for (var i = 0; i < results.length; i++) {
+                    chosenItem = results[i];
+                }
+                        // i want to match the id with the product then compare amount ordered to what's in stock
+                        if(answer.id === results[i].item_id)
+                        // if (parseInt(answer.amount) <= parseInt(chosenItem.stock_quantity)) {
+                        //     console.log(chosenItem);
+                        //     console.log("Success! Your item is in stock and your order is being placed!");
+                        //     console.log("Your total is: $" + parseInt(answer.amount) * chosenItem.price.toPrecision(5));
+                        //     connection.query(
+                        //         "UPDATE products SET ? WHERE ? ", [{
+                        //             stock_quantity: parseInt(chosenItem.stock_quantity) - parseInt(answer.amount)
+                        //         },
+                        //         {
+                        //             item_id: parseInt(answer.id)
+                        //         }],
+                        //         function(err, res) {
+                        //             if(err) throw err;
+                        //             console.log("Your order has been completed! Thanks!");
+                        //             connection.end();
+                        //         }
+                        //     )
                            
-                        } else {
-                            console.log("Insuffient stock, please try again");
-                            displayStore();
-                        }
+                        // } else {
+                        //     console.log("Insuffient stock, please try again");
+                        //     displayStore();
+                        // }
                     }
                 )
 
